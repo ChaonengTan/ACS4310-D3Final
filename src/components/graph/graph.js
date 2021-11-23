@@ -1,33 +1,40 @@
-import React from "react";
+import React from "react"
 import * as d3 from 'd3'
+import gameInfo from '../../gameInfo.csv'
 
 export default class Graph extends React.Component {
     constructor(props){
         super(props)
         this.myRef = React.createRef()
-        this.data = require('../../gameInfo.csv')
+        this.state = {data:[]}
     }
+    
     componentDidMount(){
-        console.log(this.myRef)
-        const node = d3.select(this.myRef.current)
-            .style('border', '1px solid')
-            .selectAll('g')
-            .data(this.data)
-            .enter()
-        const group = node.append('g')
-        group
-            .append('rect')
-            .attr('x', 0)
-            .attr('y', 600)
-            .attr('height', 40)
-            .attr('width', 20)
-            .attr('stroke', 'black')
-            .attr('fill', 'orange');
+        d3.csv(gameInfo).then(data => {
+            console.log(this.myRef)
+            console.log(data)
+            let svg = d3.select(this.myRef.current)
+                .append('svg')
+                .attr('width', 600)
+                .attr('height', 600)
+                .style('border', '1px black solid')
+            svg.selectAll('rect')
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr('x', d => d.i * 30)
+                .attr('y', 600-40)
+                .attr('height', 40)
+                .attr('width', 20)
+                .attr('stroke', 'black')
+                .attr('fill', 'orange');
+            this.setState({data})
+        })
     }
 
     render(){
         return(
-            <svg ref={this.myRef} height='600' width='600'></svg>
+            <div ref={this.myRef}></div>
         )
     }
 }
