@@ -24,6 +24,17 @@ export default class Graph extends React.Component {
                     .padAngle(0.01)
             )
         }
+        const countAllProperty = (data, category, reduction) => {
+            const countedData =  data.reduce((acc, obj) => {
+                acc[obj[category]] === undefined ? acc[obj[category]] = obj[reduction] : acc[obj[category]] += obj[reduction]
+                return acc
+            }, [])
+            let newParsedData = []
+            for (const [key, value] of Object.entries(countedData)) {
+                newParsedData.push({'label':key, 'value':value})
+            }
+            return newParsedData
+        }
         // renderer
         d3.csv(data).then(data => {
             let svg = d3.select(this.myRef.current)
