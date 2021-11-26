@@ -15,7 +15,7 @@ export default class Graph extends React.Component {
         const colorScale = d3.scaleSequential()
             .domain([0, data.length])
             .interpolator(d3.interpolateRainbow);
-        const pieGen = (x) => d3.pie(x)
+        const arcData = (data, property) => d3.pie(data.map(d => d[property]))
         const arcGen = (innerRadius, outerRadius) => {
             return(
                 d3.arc()
