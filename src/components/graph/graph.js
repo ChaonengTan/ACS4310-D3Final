@@ -1,6 +1,5 @@
 import React from "react"
 import * as d3 from 'd3'
-import gameInfo from '../../gameInfo.csv'
 
 export default class Graph extends React.Component {
     constructor(props){
@@ -10,13 +9,27 @@ export default class Graph extends React.Component {
     }
     
     componentDidMount(){
-        d3.csv(gameInfo).then(data => {
-            console.log(this.myRef)
-            console.log(data)
+        // consts
+        const { data, width, height } = this.props
+        // helpers
+        const colorScale = d3.scaleSequential()
+            .domain([0, data.length])
+            .interpolator(d3.interpolateRainbow);
+        const pieGen = (x) => d3.pie(x)
+        const arcGen = (innerRadius, outerRadius) => {
+            return(
+                d3.arc()
+                    .innerRadius(innerRadius)
+                    .outerRadius(outerRadius)
+                    .padAngle(0.01)
+            )
+        }
+        // renderer
+        d3.csv(data).then(data => {
             let svg = d3.select(this.myRef.current)
                 .append('svg')
-                .attr('width', 600)
-                .attr('height', 600)
+                .attr('width', width)
+                .attr('height', height)
                 .style('border', '1px black solid')
             svg.selectAll('rect')
                 .data(data)
