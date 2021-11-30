@@ -6,6 +6,10 @@ export default class Graph extends React.Component {
         super(props)
         this.myRef = React.createRef()
         this.state = {data:[]}
+        this.testData = [
+            {category:'developer', reducer:'sales'},
+            {category:'publisher', reducer:'sales'}
+        ]
     }
     
     componentDidMount(){
@@ -14,7 +18,7 @@ export default class Graph extends React.Component {
         // helpers
         const colorScale = d3.scaleSequential()
             .domain([0, data.length])
-            .interpolator(d3.interpolateRainbow);
+            .interpolator(d3.interpolateRainbow)
         const arcData = (data, property) => d3.pie(data.map(d => d[property]))
         const arcGen = (innerRadius, outerRadius) => {
             return(
@@ -24,9 +28,9 @@ export default class Graph extends React.Component {
                     .padAngle(0.01)
             )
         }
-        const countAllProperty = (data, category, reduction) => {
-            const countedData =  data.reduce((acc, obj) => {
-                acc[obj[category]] === undefined ? acc[obj[category]] = obj[reduction] : acc[obj[category]] += obj[reduction]
+        const countAllProperty = (data, category, reducer) => {
+            const countedData = data.reduce((acc, obj) => {
+                acc[obj[category]] === undefined ? acc[obj[category]] = obj[reducer] : acc[obj[category]] += obj[reducer]
                 return acc
             }, [])
             let newParsedData = []
@@ -37,21 +41,39 @@ export default class Graph extends React.Component {
         }
         // renderer
         d3.csv(data).then(data => {
-            let svg = d3.select(this.myRef.current)
+            const svg = d3.select(this.myRef.current)
                 .append('svg')
                 .attr('width', width)
                 .attr('height', height)
                 .style('border', '1px black solid')
-            svg.selectAll('rect')
-                .data(data)
-                .enter()
-                .append('rect')
-                .attr('x', d => d.i * 30)
-                .attr('y', 600-40)
-                .attr('height', 40)
-                .attr('width', 20)
-                .attr('stroke', 'black')
-                .attr('fill', 'orange');
+            this.testData.forEach((e, i) => {
+                const pieGroup = svg
+                    .append('g')
+                    .attr('transform', `translate(${width * 2}, ${height / 2})`)
+                const piepath2 = pieGroup
+                    .selectAll('path')
+                    .data(() => {
+                        console.log(arcData(data, e.reducer))
+                        arcData(data, e.reducer)
+                    })
+                    .enter()
+                    .append('path')
+                    .attr('d', arcGen(40 + 200*i, 200 + 200*i))
+                    .attr('fill', (d, i) => colorScale(i))
+            })
+
+            // svg.selectAll('rect')
+            //         .data(data)
+            //         .enter()
+            //         .append('rect')
+            //         .attr('x', d => d.i * 30)
+            //         .attr('y', 600-40)
+            //         .attr('height', 40)
+            //         .attr('width', 20)
+            //         .attr('stroke', 'black')
+            //         .attr('fill', 'orange')
+
+            // updater
             this.setState({data})
         })
     }
