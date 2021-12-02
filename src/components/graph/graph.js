@@ -6,16 +6,11 @@ export default class Graph extends React.Component {
         super(props)
         this.myRef = React.createRef()
         this.state = {data:[]}
-        this.testData = [
-            {category:'publisher', reducer:'sales'},
-            {category:'title', reducer:'sales'},
-            {category:'platform', reducer:'sales'}
-        ]
     }
     
     componentDidMount(){
         // consts
-        const { data, width, height, graphSpacing, graphSize } = this.props
+        const { data, width, height, graphSpacing, graphSize, filters } = this.props
         // helpers
         const colorScale = d3.scaleSequential()
             .domain([0, data.length])
@@ -47,7 +42,7 @@ export default class Graph extends React.Component {
                 .attr('width', width)
                 .attr('height', height)
                 .style('border', '1px black solid')
-            this.testData.forEach((e, i) => {
+            filters.forEach((e, i) => {
                 // consts
                 const pieGroup = svg
                     .append('g')
@@ -55,9 +50,6 @@ export default class Graph extends React.Component {
                 const pieGen = d3.pie()
                 const pieGenData = countAllProperty(data, e.category, e.reducer)
                 // drawer
-                console.log(pieGenData.map(d => d.value))
-                console.log(pieGenData)
-                console.log(e.reducer)
                 const piepath = pieGroup
                     .selectAll('path')
                     .data(pieGen(pieGenData.map(d => d.value)))
