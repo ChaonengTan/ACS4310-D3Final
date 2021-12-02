@@ -9,6 +9,8 @@ function App() {
         data={gameInfo}
         width='600'
         height='600'
+        graphSpacing='10'
+        graphSize='100'
       />
     </div>
   );

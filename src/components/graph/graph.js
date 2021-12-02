@@ -8,13 +8,14 @@ export default class Graph extends React.Component {
         this.state = {data:[]}
         this.testData = [
             {category:'publisher', reducer:'sales'},
-            {category:'title', reducer:'sales'}
+            {category:'title', reducer:'sales'},
+            {category:'platform', reducer:'sales'}
         ]
     }
     
     componentDidMount(){
         // consts
-        const { data, width, height } = this.props
+        const { data, width, height, graphSpacing, graphSize } = this.props
         // helpers
         const colorScale = d3.scaleSequential()
             .domain([0, data.length])
@@ -54,25 +55,17 @@ export default class Graph extends React.Component {
                 const pieGen = d3.pie()
                 const pieGenData = countAllProperty(data, e.category, e.reducer)
                 // drawer
+                console.log(pieGenData.map(d => d.value))
+                console.log(pieGenData)
+                console.log(e.reducer)
                 const piepath = pieGroup
                     .selectAll('path')
-                    .data(pieGen(pieGenData.map(d => d[e.reducer])))
+                    .data(pieGen(pieGenData.map(d => d.value)))
                     .enter()
                     .append('path')
-                    .attr('d', arcGen(40 + 200*i, 200 + 200*i))
+                    .attr('d', arcGen(parseInt(graphSpacing) + parseInt(graphSize)*i, parseInt(graphSize)*(i+1)))
                     .attr('fill', (d, i) => colorScale(i))
             })
-
-            // svg.selectAll('rect')
-            //     .data(data)
-            //     .enter()
-            //     .append('rect')
-            //     .attr('x', d => d.i * 30)
-            //     .attr('y', 600-40)
-            //     .attr('height', 40)
-            //     .attr('width', 20)
-            //     .attr('stroke', 'black')
-            //     .attr('fill', 'orange')
 
             // updater
             this.setState({data})
