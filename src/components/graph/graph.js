@@ -6,6 +6,7 @@ export default class Graph extends React.Component {
         super(props)
         this.myRef = React.createRef()
         this.state = {data:[]}
+        this.filterExists = []
     }
     
     componentDidMount(){
@@ -47,6 +48,8 @@ export default class Graph extends React.Component {
         // renderer
         d3.csv(data).then(data => {
             filters.forEach((e, i) => {
+                if(this.filterExists.includes(e)) { return }
+                this.filterExists.push(e)
                 // consts
                 const pieGroup = this.svg
                     .append('g')
