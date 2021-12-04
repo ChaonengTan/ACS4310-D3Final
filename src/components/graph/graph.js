@@ -48,15 +48,29 @@ export default class Graph extends React.Component {
                     .append('g')
                     .attr('transform', `translate(${width / 2}, ${height / 2})`)
                 const pieGen = d3.pie()
-                const pieGenData = countAllProperty(data, e.category, e.reducer)
-                // drawer
+                const countedProperties = countAllProperty(data, e.category, e.reducer)
+                const pieData = pieGen(countedProperties.map(d => d.value))
+                // pie chart
                 const piepath = pieGroup
                     .selectAll('path')
-                    .data(pieGen(pieGenData.map(d => d.value)))
+                    .data(pieData)
                     .enter()
                     .append('path')
                     .attr('d', arcGen(parseInt(graphSpacing) + parseInt(graphSize)*i, parseInt(graphSize)*(i+1)))
                     .attr('fill', (d, i) => colorScale(i))
+                // pieLabel
+                const pieLabels = svg
+                    .append('g')
+                    .attr('transform', `translate(${width / 2}, ${height / 2})`)
+                const pieLabelArc = arcGen(parseInt(graphSpacing) + parseInt(graphSize)*i, parseInt(graphSize)*(i+1))
+                pieLabels
+                    .selectAll('text')
+                    .data(countedProperties)
+                    .enter()
+                    .append('text')
+                    .text(d => d.label)
+                    .attr("transform", (d, i) => `translate(${pieLabelArc.centroid(pieData[i])})`)
+                    .attr('text-anchor', 'middle')
             })
 
             // updater
