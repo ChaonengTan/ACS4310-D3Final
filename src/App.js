@@ -10,7 +10,7 @@ const testData = [
 ]
 
 function App() {
-  const [filters, setFilters] = useState(testData);
+  const [filters, setFilters] = useState([]);
   const addNewFilter = data => setFilters([...filters, data])
 
   const [category, setCategory] = useState(null)
