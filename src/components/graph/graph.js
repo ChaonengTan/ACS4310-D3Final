@@ -6,16 +6,17 @@ export default class Graph extends React.Component {
         super(props)
         this.myRef = React.createRef()
         this.state = {data:[]}
+        this.filterExists = []
     }
     
     componentDidMount(){
         // consts
-        const { data, width, height, graphSpacing, graphSize, filters } = this.props
+        const { data, width, height } = this.props
         // helpers
-        const colorScale = d3.scaleSequential()
+        this.colorScale = d3.scaleSequential()
             .domain([0, data.length])
             .interpolator(d3.interpolateRainbow)
-        const arcGen = (innerRadius, outerRadius) => {
+        this.arcGen = (innerRadius, outerRadius) => {
             return(
                 d3.arc()
                     .innerRadius(innerRadius)
@@ -23,7 +24,7 @@ export default class Graph extends React.Component {
                     .padAngle(0.01)
             )
         }
-        const countAllProperty = (data, category, reducer) => {
+        this.countAllProperty = (data, category, reducer) => {
             const parseNum = e => parseInt(e.split(',').join(''))
             const countedData = data.reduce((acc, obj) => {
                 acc[obj[category]] === undefined ? acc[obj[category]] = parseNum(obj[reducer]) : acc[obj[category]] += parseNum(obj[reducer])
@@ -35,36 +36,56 @@ export default class Graph extends React.Component {
             }
             return newParsedData
         }
-        // renderer
-        d3.csv(data).then(data => {
-            const svg = d3.select(this.myRef.current)
+        this.svg = d3.select(this.myRef.current)
                 .append('svg')
                 .attr('width', width)
                 .attr('height', height)
                 .style('border', '1px black solid')
+    }
+    componentDidUpdate(){
+        // consts
+        const { data, width, height, graphSpacing, graphSize, filters } = this.props
+        // renderer
+        d3.csv(data).then(data => {
             filters.forEach((e, i) => {
+                if(this.filterExists.includes(e)) { return }
+                this.filterExists.push(e)
                 // consts
-                const pieGroup = svg
+                const pieGroup = this.svg
                     .append('g')
                     .attr('transform', `translate(${width / 2}, ${height / 2})`)
                 const pieGen = d3.pie()
-                const pieGenData = countAllProperty(data, e.category, e.reducer)
-                // drawer
+                const countedProperties = this.countAllProperty(data, e.category, e.reducer)
+                const pieData = pieGen(countedProperties.map(d => d.value))
+                // pie chart
                 const piepath = pieGroup
                     .selectAll('path')
-                    .data(pieGen(pieGenData.map(d => d.value)))
+                    .data(pieData)
                     .enter()
                     .append('path')
-                    .attr('d', arcGen(parseInt(graphSpacing) + parseInt(graphSize)*i, parseInt(graphSize)*(i+1)))
-                    .attr('fill', (d, i) => colorScale(i))
+                    .attr('d', this.arcGen(parseInt(graphSpacing) + parseInt(graphSize)*i, parseInt(graphSize)*(i+1)))
+                    .attr('fill', (d, i) => this.colorScale(i))
+                // pieLabel
+                const pieLabels = this.svg
+                    .append('g')
+                    .attr('transform', `translate(${width / 2}, ${height / 2})`)
+                const pieLabelArc = this.arcGen(parseInt(graphSpacing) + parseInt(graphSize)*i, parseInt(graphSize)*(i+1))
+                pieLabels
+                    .selectAll('text')
+                    .data(countedProperties)
+                    .enter()
+                    .append('text')
+                    .text(d => d.label)
+                    .attr("transform", (d, i) => `translate(${pieLabelArc.centroid(pieData[i])})`)
+                    .attr('text-anchor', 'middle')
             })
 
             // updater
             this.setState({data})
         })
     }
-
     render(){
+        // console.log(this.props.filters)
         return(
             <div ref={this.myRef}></div>
         )
