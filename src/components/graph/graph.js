@@ -25,7 +25,7 @@ export default class Graph extends React.Component {
             )
         }
         this.countAllProperty = (data, category, reducer) => {
-            const parseNum = e => parseInt(e.split(',').join(''))
+            const parseNum = e => e === undefined ? 0 : parseInt(e.split(',').join(''))
             const countedData = data.reduce((acc, obj) => {
                 acc[obj[category]] === undefined ? acc[obj[category]] = parseNum(obj[reducer]) : acc[obj[category]] += parseNum(obj[reducer])
                 return acc
@@ -85,7 +85,6 @@ export default class Graph extends React.Component {
         })
     }
     render(){
-        // console.log(this.props.filters)
         return(
             <div ref={this.myRef}></div>
         )

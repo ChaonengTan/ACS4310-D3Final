@@ -3,13 +3,9 @@ import { useState } from 'react';
 import Graph from './components/graph/graph'
 import gameInfo from './gameInfo.csv'
 
-const testData = [
-  {category:'publisher', reducer:'sales'},
-  {category:'title', reducer:'sales'},
-  {category:'platform', reducer:'sales'}
-]
-
 function App() {
+  // CSV
+  const [CSV, setCSV] = useState(gameInfo)
   // filterData
   const [filters, setFilters] = useState([]);
   const addNewFilter = data => setFilters([...filters, data])
@@ -26,7 +22,7 @@ function App() {
     const graphStorage = () => {
       return (
         <Graph 
-        data={gameInfo}
+        data={CSV}
         width={width}
         height={height}
         graphSpacing={graphSpacing}
@@ -53,6 +49,7 @@ function App() {
               <input type='text' onChange={e => setGraphSpacing(e.target.value)} placeholder='graphSpacing' value={graphSpacing}></input>
               <input type='text' onChange={e => setGraphSize(e.target.value)} placeholder='graphSize' value={graphSize}></input>
             </div>
+            <input type='file' id='customCSV' onChange={e => setCSV(URL.createObjectURL(e.target.files[0]))}></input>
             <button onClick={() => setNewGraph()}>Initialize Graph</button>
           </div>
         }
@@ -63,7 +60,6 @@ function App() {
             <input type='text' onChange={e => setReducer(e.target.value)} placeholder='reducer'></input>
             <button onClick={e => {
               addNewFilter({category:`${category}`, reducer:`${reducer}`})
-              console.log(filters)
               setNewGraph()
             }}>Add Filter</button>
         </div>
