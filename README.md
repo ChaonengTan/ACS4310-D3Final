@@ -1,3 +1,31 @@
+# D3 Pie Graph Data Renderer (CSV)
+
+## Description
+
+Turns a CSV file into a dynamic pie chart
+Note: Compares string-numeric values only
+ie. CSV file with a list of repeated publishers and sales/publisher
+
+## How to use
+
+### If Downloading (Hosted on GithubPages)
+
+`cd [directory]`
+`npm start` or `yarn start`
+
+### Using the application
+
+1. Fill in SVG perameters (Optional): Width, Height, graphSpacing, graphSize (Marked by placeholder='')
+1. Add your own CSV file (Optional)
+1. Initialize
+1. Add in filters for: Category, Reducer (WARNING: Check Description Note)
+1. Add Filter (Bug Note: you have to "add" twice for it to render)
+
+## React
+
+This project was created using React App
+Check the following for more information about React
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
