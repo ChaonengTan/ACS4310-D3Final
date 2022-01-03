@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/D3PieGraphDataRenderer-ACS4310/static/css/main.9a105a5b.chunk.css",
-    "main.js": "/D3PieGraphDataRenderer-ACS4310/static/js/main.9db52d4b.chunk.js",
-    "main.js.map": "/D3PieGraphDataRenderer-ACS4310/static/js/main.9db52d4b.chunk.js.map",
-    "runtime-main.js": "/D3PieGraphDataRenderer-ACS4310/static/js/runtime-main.ff968bc7.js",
-    "runtime-main.js.map": "/D3PieGraphDataRenderer-ACS4310/static/js/runtime-main.ff968bc7.js.map",
-    "static/js/2.5db9bfb5.chunk.js": "/D3PieGraphDataRenderer-ACS4310/static/js/2.5db9bfb5.chunk.js",
-    "static/js/2.5db9bfb5.chunk.js.map": "/D3PieGraphDataRenderer-ACS4310/static/js/2.5db9bfb5.chunk.js.map",
-    "static/js/3.028776c3.chunk.js": "/D3PieGraphDataRenderer-ACS4310/static/js/3.028776c3.chunk.js",
-    "static/js/3.028776c3.chunk.js.map": "/D3PieGraphDataRenderer-ACS4310/static/js/3.028776c3.chunk.js.map",
-    "index.html": "/D3PieGraphDataRenderer-ACS4310/index.html",
-    "static/css/main.9a105a5b.chunk.css.map": "/D3PieGraphDataRenderer-ACS4310/static/css/main.9a105a5b.chunk.css.map",
-    "static/js/2.5db9bfb5.chunk.js.LICENSE.txt": "/D3PieGraphDataRenderer-ACS4310/static/js/2.5db9bfb5.chunk.js.LICENSE.txt",
-    "static/media/gameInfo.a28dd38d.csv": "/D3PieGraphDataRenderer-ACS4310/static/media/gameInfo.a28dd38d.csv"
+    "main.css": "/D3DataRenderer/static/css/main.9a105a5b.chunk.css",
+    "main.js": "/D3DataRenderer/static/js/main.9db52d4b.chunk.js",
+    "main.js.map": "/D3DataRenderer/static/js/main.9db52d4b.chunk.js.map",
+    "runtime-main.js": "/D3DataRenderer/static/js/runtime-main.d25168ce.js",
+    "runtime-main.js.map": "/D3DataRenderer/static/js/runtime-main.d25168ce.js.map",
+    "static/js/2.5db9bfb5.chunk.js": "/D3DataRenderer/static/js/2.5db9bfb5.chunk.js",
+    "static/js/2.5db9bfb5.chunk.js.map": "/D3DataRenderer/static/js/2.5db9bfb5.chunk.js.map",
+    "static/js/3.028776c3.chunk.js": "/D3DataRenderer/static/js/3.028776c3.chunk.js",
+    "static/js/3.028776c3.chunk.js.map": "/D3DataRenderer/static/js/3.028776c3.chunk.js.map",
+    "index.html": "/D3DataRenderer/index.html",
+    "static/css/main.9a105a5b.chunk.css.map": "/D3DataRenderer/static/css/main.9a105a5b.chunk.css.map",
+    "static/js/2.5db9bfb5.chunk.js.LICENSE.txt": "/D3DataRenderer/static/js/2.5db9bfb5.chunk.js.LICENSE.txt",
+    "static/media/gameInfo.a28dd38d.csv": "/D3DataRenderer/static/media/gameInfo.a28dd38d.csv"
   },
   "entrypoints": [
-    "static/js/runtime-main.ff968bc7.js",
+    "static/js/runtime-main.d25168ce.js",
     "static/js/2.5db9bfb5.chunk.js",
     "static/css/main.9a105a5b.chunk.css",
     "static/js/main.9db52d4b.chunk.js"
