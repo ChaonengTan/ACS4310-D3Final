@@ -2,6 +2,7 @@ import './App.css';
 import { useState } from 'react';
 import Graph from './components/graph/graph'
 import gameInfo from './gameInfo.csv'
+import * as htmlToImage from 'html-to-image'
 
 function App() {
   // CSV
@@ -33,6 +34,10 @@ function App() {
     }
     setGraph(graphStorage())
   }
+  // functions
+  const exportImage = elem => {
+
+  }
 
   // return
   return (
@@ -62,10 +67,12 @@ function App() {
               addNewFilter({category:`${category}`, reducer:`${reducer}`})
               setNewGraph()
             }}>Add Filter</button>
-        </div>
+            <button onClick={}>Get Screenshot</button>
+            <div className='ssBox'></div>
+          </div>
         }
       </div>
-      {graph}
+      <div className='graph'>{graph}</div>
     </div>
   );
 }
