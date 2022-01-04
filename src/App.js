@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Graph from './components/graph/graph'
 import gameInfo from './gameInfo.csv'
 import * as htmlToImage from 'html-to-image'
+import { saveAs } from 'file-saver'
 
 function App() {
   // CSV
@@ -34,10 +35,12 @@ function App() {
     }
     setGraph(graphStorage())
   }
-  // functions
-  const exportImage = elem => {
-
+  // saveAs
+  const saveElement = (id, fileName) => {
+    htmlToImage.toPng(document.getElementById(id))
+     .then(dataUrl => saveAs(dataUrl,`${fileName}.png`))
   }
+  const [saveAsName, setSaveAsName] = useState('myFile')
 
   // return
   return (
@@ -67,12 +70,14 @@ function App() {
               addNewFilter({category:`${category}`, reducer:`${reducer}`})
               setNewGraph()
             }}>Add Filter</button>
-            <button onClick={}>Get Screenshot</button>
-            <div className='ssBox'></div>
+            <div className='saveAs'>
+              <input type='text' placeholder='myFile.png' value={saveAsName} onChange={e => setSaveAsName(e.target.value)}></input>
+              <button onClick={() => saveElement('graph', saveAsName)}>Save Image</button>
+            </div>
           </div>
         }
       </div>
-      <div className='graph'>{graph}</div>
+      <div id='graph'>{graph}</div>
     </div>
   );
 }
