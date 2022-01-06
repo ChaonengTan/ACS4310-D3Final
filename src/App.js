@@ -35,12 +35,12 @@ function App() {
     }
     setGraph(graphStorage())
   }
-  // saveAs
+  // saveElement
+  const [saveAsName, setSaveAsName] = useState('myFile')
   const saveElement = (id, fileName) => {
     htmlToImage.toPng(document.getElementById(id))
-     .then(dataUrl => saveAs(dataUrl,`${fileName}.png`))
+      .then(dataUrl => saveAs(dataUrl,`${fileName}.png`))
   }
-  const [saveAsName, setSaveAsName] = useState('myFile')
 
   // return
   return (
