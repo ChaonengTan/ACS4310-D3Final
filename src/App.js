@@ -24,13 +24,13 @@ function App() {
     const graphStorage = () => {
       return (
         <Graph 
-        data={CSV}
-        width={width}
-        height={height}
-        graphSpacing={graphSpacing}
-        graphSize={graphSize}
-        filters={filters}
-      />
+          data={CSV}
+          width={width}
+          height={height}
+          graphSpacing={graphSpacing}
+          graphSize={graphSize}
+          filters={filters}
+        />
       )
     }
     setGraph(graphStorage())
