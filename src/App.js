@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 import Graph from './components/graph/graph'
 import gameInfo from './gameInfo.csv'
 import * as htmlToImage from 'html-to-image'
@@ -13,6 +13,15 @@ function App() {
   const addNewFilter = data => setFilters([...filters, data])
   const [category, setCategory] = useState(null)
   const [reducer, setReducer] = useState(null)
+  // filter-graph updater: detects wether filters updates => updates the graph
+  const firstUpdate = useRef(true);
+  useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return
+    }
+    setNewGraph()
+  }, [filters])
   // initializationData
   const [width, setWidth] = useState('600')
   const [height, setHeight] = useState('600')
@@ -24,13 +33,13 @@ function App() {
     const graphStorage = () => {
       return (
         <Graph 
-        data={CSV}
-        width={width}
-        height={height}
-        graphSpacing={graphSpacing}
-        graphSize={graphSize}
-        filters={filters}
-      />
+          data={CSV}
+          width={width}
+          height={height}
+          graphSpacing={graphSpacing}
+          graphSize={graphSize}
+          filters={filters}
+        />
       )
     }
     setGraph(graphStorage())
@@ -47,8 +56,7 @@ function App() {
     <div className="App">
       <div className='interface'>
         {/* initialization */}
-        {!graph &&
-          <div className='initializer'>
+        <div className='initializer'>
             <div className='graphSize'>
               <input type='text' onChange={e => setWidth(e.target.value)} placeholder='width' value={width}></input>
               <input type='text' onChange={e => setHeight(e.target.value)} placeholder='height' value={height}></input>
@@ -60,16 +68,12 @@ function App() {
             <input type='file' id='customCSV' onChange={e => setCSV(URL.createObjectURL(e.target.files[0]))}></input>
             <button onClick={() => setNewGraph()}>Initialize Graph</button>
           </div>
-        }
         {/* generalInterface */}
         {graph &&
           <div className='addNewFilter'>
             <input type='text' onChange={e => setCategory(e.target.value)} placeholder='category'></input>
             <input type='text' onChange={e => setReducer(e.target.value)} placeholder='reducer'></input>
-            <button onClick={e => {
-              addNewFilter({category:`${category}`, reducer:`${reducer}`})
-              setNewGraph()
-            }}>Add Filter</button>
+            <button onClick={e => addNewFilter({category:`${category}`, reducer:`${reducer}`})}>Add Filter</button>
             <div className='saveAs'>
               <input type='text' placeholder='myFile.png' value={saveAsName} onChange={e => setSaveAsName(e.target.value)}></input>
               <button onClick={() => saveElement('graph', saveAsName)}>Save Image</button>
