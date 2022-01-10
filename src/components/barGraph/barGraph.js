@@ -36,7 +36,7 @@ export default class BarGraph extends React.Component {
     }
     componentDidUpdate(){
         // consts
-        const { data, width, height, graphSpacing, graphSize, filters, margin=100 } = this.props
+        const { data, width, height, filters, margin } = this.props
         // renderer
         d3.csv(data).then(data => {
             filters.forEach((e, i) => {
@@ -66,11 +66,12 @@ export default class BarGraph extends React.Component {
                     .attr('d', linegen(countedData))
                     .attr('stroke-width', 1)
                     .attr('stroke', 'none')
-                    .attr('fill', `${this.colorScale(i)}`)
+                    .attr('fill', `${this.colorScale(filters.length/i)}`)
                     .style('opacity', '.3')
                 // axis
                 const bottomAxis = d3.axisBottom(xscale)
                     .tickFormat((_, i) => xscalelabels[i])
+                    .ticks(xscalelabels.length)
                 const leftAxis = d3.axisLeft(yscale)
                 this.svg
                     .append('g')
