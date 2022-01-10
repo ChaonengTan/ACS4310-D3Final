@@ -13,9 +13,6 @@ export default class BarGraph extends React.Component {
         // consts
         const { data, width, height } = this.props
         // helpers
-        this.colorScale = d3.scaleSequential()
-            .domain([0, data.length])
-            .interpolator(d3.interpolateRainbow)
         this.countAllProperty = (data, category, reducer) => {
             const parseNum = e => e === undefined ? 0 : parseInt(e.split(',').join(''))
             const countedData = data.reduce((acc, obj) => {
@@ -51,6 +48,9 @@ export default class BarGraph extends React.Component {
                     .domain([0, countedData.length - 1])
                     .range([margin, width - margin])
                 const xscalelabels = countedData.map(obj => obj.label)
+                this.colorScale = d3.scaleSequential()
+                    .domain([0, xscalelabels.length])
+                    .interpolator(d3.interpolateRainbow)
                 const yscale = d3.scaleLinear()
                     .domain(d3.extent(countedData, d => d.value))
                     .range([height - margin, margin])
@@ -66,7 +66,7 @@ export default class BarGraph extends React.Component {
                     .attr('d', linegen(countedData))
                     .attr('stroke-width', 1)
                     .attr('stroke', 'none')
-                    .attr('fill', `${this.colorScale(filters.length/i)}`)
+                    .attr('fill', (d, i) => this.colorScale(i))
                     .style('opacity', '.3')
                 // axis
                 const bottomAxis = d3.axisBottom(xscale)
