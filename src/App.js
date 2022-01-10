@@ -102,7 +102,7 @@ function App() {
               }
             </div>
             <input type='file' id='customCSV' onChange={e => setCSV(URL.createObjectURL(e.target.files[0]))}></input>
-            <button onClick={() => setNewGraph()}>Initialize Graph</button>
+            <button onClick={() => setFilters([])}>Initialize Graph</button>
             {graph &&
             <button onClick={() => setGraph(null)}>clearGraph</button>
             }
