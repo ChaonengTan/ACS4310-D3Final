@@ -37,7 +37,7 @@ function App() {
     const graphStorage = () => {
       if(graphType == 'PieGraph'){
         return (
-          <PieGraph 
+          <PieGraph
             data={CSV}
             width={width}
             height={height}
@@ -49,12 +49,10 @@ function App() {
       }
       if(graphType == 'BarGraph'){
         return (
-          <BarGraph 
+          <BarGraph
             data={CSV}
             width={width}
             height={height}
-            graphSpacing={graphSpacing}
-            graphSize={graphSize}
             filters={filters}
             margin={margin}
           />
@@ -87,15 +85,21 @@ function App() {
               <p>height</p>
               <input type='number' onChange={e => setHeight(e.target.value)} placeholder='height' value={height}></input>
             </div>
-            <div className='graphSettings'>
-              <p>graphSpacing</p>
-              <input type='number' onChange={e => setGraphSpacing(e.target.value)} placeholder='graphSpacing' value={graphSpacing}></input>
-              <p>graphSize</p>
-              <input type='number' onChange={e => setGraphSize(e.target.value)} placeholder='graphSize' value={graphSize}></input>
-            </div>
             <div className='additionalSettings'>
-              <p>margin</p>
-              <input type='number' onChange={e => setMargin(e.target.value)} placeholder='margin' value={margin}></input>
+              {graphType=='PieGraph' &&
+              <div className='pieGraphSettings'>
+                <p>graphSpacing</p>
+                <input type='number' onChange={e => setGraphSpacing(e.target.value)} placeholder='graphSpacing' value={graphSpacing}></input>
+                <p>graphSize</p>
+                <input type='number' onChange={e => setGraphSize(e.target.value)} placeholder='graphSize' value={graphSize}></input>
+              </div>
+              }
+              {graphType=='BarGraph' &&
+              <div className='barGraphSettings'>
+                <p>margin</p>
+                <input type='number' onChange={e => setMargin(e.target.value)} placeholder='margin' value={margin}></input>
+              </div>
+              }
             </div>
             <input type='file' id='customCSV' onChange={e => setCSV(URL.createObjectURL(e.target.files[0]))}></input>
             <button onClick={() => setNewGraph()}>Initialize Graph</button>
