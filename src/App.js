@@ -1,9 +1,11 @@
 import './App.css';
 import { useState, useRef, useLayoutEffect } from 'react';
-import Graph from './components/pieGraph/pieGraph'
 import gameInfo from './gameInfo.csv'
 import * as htmlToImage from 'html-to-image'
 import { saveAs } from 'file-saver'
+// importGraphs
+import PieGraph from './components/pieGraph/pieGraph'
+import LineGraph from './components/lineGraph/lineGraph'
 
 function App() {
   // CSV
@@ -28,19 +30,34 @@ function App() {
   const [graphSpacing, setGraphSpacing] = useState('10')
   const [graphSize, setGraphSize] = useState('100')
   // graphData
+  const [graphType, setGraphType] = useState('PieGraph')
   const [graph, setGraph] = useState(null)
   const setNewGraph = () => {
     const graphStorage = () => {
-      return (
-        <Graph 
-          data={CSV}
-          width={width}
-          height={height}
-          graphSpacing={graphSpacing}
-          graphSize={graphSize}
-          filters={filters}
-        />
-      )
+      if(graphType == 'PieGraph'){
+        return (
+          <PieGraph 
+            data={CSV}
+            width={width}
+            height={height}
+            graphSpacing={graphSpacing}
+            graphSize={graphSize}
+            filters={filters}
+          />
+        )
+      }
+      if(graphType == 'LineGraph'){
+        return (
+          <LineGraph 
+            data={CSV}
+            width={width}
+            height={height}
+            graphSpacing={graphSpacing}
+            graphSize={graphSize}
+            filters={filters}
+          />
+        )
+      }
     }
     setGraph(graphStorage())
   }
@@ -58,12 +75,21 @@ function App() {
         {/* initialization */}
         {!graph &&
           <div className='initializer'>
+            <select value={graphType} onChange={e => setGraphType(e.target.value)}>
+              <option>LineGraph</option>
+              <option>PieGraph</option>
+            </select>
+            {graphType}
             <div className='graphSize'>
+              <p>width</p>
               <input type='text' onChange={e => setWidth(e.target.value)} placeholder='width' value={width}></input>
+              <p>height</p>
               <input type='text' onChange={e => setHeight(e.target.value)} placeholder='height' value={height}></input>
             </div>
             <div className='graphSettings'>
+              <p>graphSpacing</p>
               <input type='text' onChange={e => setGraphSpacing(e.target.value)} placeholder='graphSpacing' value={graphSpacing}></input>
+              <p>graphSize</p>
               <input type='text' onChange={e => setGraphSize(e.target.value)} placeholder='graphSize' value={graphSize}></input>
             </div>
             <input type='file' id='customCSV' onChange={e => setCSV(URL.createObjectURL(e.target.files[0]))}></input>
