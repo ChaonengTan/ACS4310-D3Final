@@ -5,7 +5,7 @@ import * as htmlToImage from 'html-to-image'
 import { saveAs } from 'file-saver'
 // importGraphs
 import PieGraph from './components/pieGraph/pieGraph'
-import LineGraph from './components/lineGraph/lineGraph'
+import BarGraph from './components/barGraph/barGraph'
 
 function App() {
   // CSV
@@ -46,9 +46,9 @@ function App() {
           />
         )
       }
-      if(graphType == 'LineGraph'){
+      if(graphType == 'BarGraph'){
         return (
-          <LineGraph 
+          <BarGraph 
             data={CSV}
             width={width}
             height={height}
@@ -76,7 +76,7 @@ function App() {
         {!graph &&
           <div className='initializer'>
             <select value={graphType} onChange={e => setGraphType(e.target.value)}>
-              <option>LineGraph</option>
+              <option>BarGraph</option>
               <option>PieGraph</option>
             </select>
             {graphType}
