@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useRef, useLayoutEffect } from 'react';
-import Graph from './components/graph/graph'
+import Graph from './components/pieGraph/pieGraph'
 import gameInfo from './gameInfo.csv'
 import * as htmlToImage from 'html-to-image'
 import { saveAs } from 'file-saver'
@@ -56,7 +56,8 @@ function App() {
     <div className="App">
       <div className='interface'>
         {/* initialization */}
-        <div className='initializer'>
+        {!graph &&
+          <div className='initializer'>
             <div className='graphSize'>
               <input type='text' onChange={e => setWidth(e.target.value)} placeholder='width' value={width}></input>
               <input type='text' onChange={e => setHeight(e.target.value)} placeholder='height' value={height}></input>
@@ -68,6 +69,7 @@ function App() {
             <input type='file' id='customCSV' onChange={e => setCSV(URL.createObjectURL(e.target.files[0]))}></input>
             <button onClick={() => setNewGraph()}>Initialize Graph</button>
           </div>
+        }
         {/* generalInterface */}
         {graph &&
           <div className='addNewFilter'>
