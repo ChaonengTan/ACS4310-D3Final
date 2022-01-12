@@ -1,0 +1,34 @@
+.App {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin: 2rem;
+    .interface {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        width: 40vw;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #ffb8f3;
+        height: 100%;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        .interfaceGroup {
+            border: black 1px solid;
+            padding: 2rem;
+            margin-bottom: 1rem;
+        }
+        .inputGroup {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+        }
+    }
+    &:last-child {
+        margin-left: 50vw;
+        overflow: scroll;
+    }
+}
