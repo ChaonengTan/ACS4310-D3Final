@@ -66,5 +66,13 @@ button {
   width: 100%;
   border-radius: .5rem;
   background-color: white;
+  color: black;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
 }
 /*# sourceMappingURL=App.css.map */
