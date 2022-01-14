@@ -2,8 +2,8 @@
 
 ## Description
 
-Turns a CSV file into a dynamic pie chart
-Note: Compares string-numeric values only
+Turns a CSV file into a dynamic D3Graph
+Note: Compares string to numeric values only
 ie. CSV file with a list of repeated publishers and sales/publisher
 
 ## How to use
@@ -11,15 +11,17 @@ ie. CSV file with a list of repeated publishers and sales/publisher
 ### If Downloading (Hosted on GithubPages)
 
 `cd [directory]`
+`npm install`
 `npm start` or `yarn start`
 
 ### Using the application
 
-1. Fill in SVG perameters (Optional): Width, Height, graphSpacing, graphSize (Marked by placeholder='')
-1. Add your own CSV file (Optional)
+1. Fill in SVG parameters (Optional): Width, Height, Additional Graph-Specific Parameters
+1. Add your own CSV file
 1. Initialize
 1. Add in filters for: Category, Reducer (WARNING: Check Description Note)
-1. Add Filter (Bug Note: you have to "add" twice for it to render)
+1. Add Filter
+1. (Optional) Input name custom file name and install generated graph
 
 ## React
 
