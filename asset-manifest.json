@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/D3DataRenderer/static/css/main.b50ee0f1.chunk.css",
-    "main.js": "/D3DataRenderer/static/js/main.8d8bc4fd.chunk.js",
-    "main.js.map": "/D3DataRenderer/static/js/main.8d8bc4fd.chunk.js.map",
+    "main.css": "/D3DataRenderer/static/css/main.88b268c0.chunk.css",
+    "main.js": "/D3DataRenderer/static/js/main.2425b789.chunk.js",
+    "main.js.map": "/D3DataRenderer/static/js/main.2425b789.chunk.js.map",
     "runtime-main.js": "/D3DataRenderer/static/js/runtime-main.957198b4.js",
     "runtime-main.js.map": "/D3DataRenderer/static/js/runtime-main.957198b4.js.map",
     "static/js/2.9208c557.chunk.js": "/D3DataRenderer/static/js/2.9208c557.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.0958ed66.chunk.js": "/D3DataRenderer/static/js/3.0958ed66.chunk.js",
     "static/js/3.0958ed66.chunk.js.map": "/D3DataRenderer/static/js/3.0958ed66.chunk.js.map",
     "index.html": "/D3DataRenderer/index.html",
-    "static/css/main.b50ee0f1.chunk.css.map": "/D3DataRenderer/static/css/main.b50ee0f1.chunk.css.map",
+    "static/css/main.88b268c0.chunk.css.map": "/D3DataRenderer/static/css/main.88b268c0.chunk.css.map",
     "static/js/2.9208c557.chunk.js.LICENSE.txt": "/D3DataRenderer/static/js/2.9208c557.chunk.js.LICENSE.txt",
     "static/media/gameInfo.a28dd38d.csv": "/D3DataRenderer/static/media/gameInfo.a28dd38d.csv"
   },
   "entrypoints": [
     "static/js/runtime-main.957198b4.js",
     "static/js/2.9208c557.chunk.js",
-    "static/css/main.b50ee0f1.chunk.css",
-    "static/js/main.8d8bc4fd.chunk.js"
+    "static/css/main.88b268c0.chunk.css",
+    "static/js/main.2425b789.chunk.js"
   ]
 }
