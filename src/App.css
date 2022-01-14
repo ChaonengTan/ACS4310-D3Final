@@ -53,4 +53,18 @@
   margin-left: 50vw;
   overflow: scroll;
 }
+
+input {
+  height: 1rem;
+  padding: .5rem;
+  font-size: 1rem;
+  border-radius: .5rem;
+}
+
+button {
+  height: 2.5rem;
+  width: 100%;
+  border-radius: .5rem;
+  background-color: white;
+}
 /*# sourceMappingURL=App.css.map */
